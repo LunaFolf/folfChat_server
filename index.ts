@@ -79,7 +79,7 @@ wss.on('connection', ws => {
     }
 
     if (parsedMessage.type === 'signup') {
-      if (userExists(parsedMessage.token)) {
+      if (users.find(user => user.username === parsedMessage.username)) {
         ws.send(JSON.stringify({ type: 'signup', success: false }));
         return;
       }
