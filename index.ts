@@ -1,5 +1,6 @@
 import * as ws from 'ws';
 import https from 'https';
+import fs from 'fs';
 
 require('dotenv').config();
 
