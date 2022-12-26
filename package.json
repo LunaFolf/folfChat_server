@@ -12,7 +12,8 @@
   "dependencies": {
     "@types/node": "^18.11.17",
     "@types/ws": "^8.5.3",
-    "@whiskeedev/trestle": "^2.0.1"
+    "@whiskeedev/trestle": "^2.0.1",
+    "dotenv": "^16.0.3"
   },
   "devDependencies": {
     "typescript": "^4.9.4",
