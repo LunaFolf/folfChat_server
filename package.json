@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "tsc --watch & node --watch --no-warnings dist/index.js"
+    "start": "tsc --watch & node --watch dist/index.js"
   },
   "keywords": [],
   "author": "",
