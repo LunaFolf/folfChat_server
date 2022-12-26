@@ -1,4 +1,5 @@
 import * as ws from 'ws';
+import https from 'https';
 
 require('dotenv').config();
 
@@ -7,10 +8,24 @@ const wordDict = require('./words.json');
 const messageHistory: ChatMessage[] = [];
 const users: User[] = [];
 
+const sslCertPath = process.env.SSL_CERT;
+const sslKeyPath = process.env.SSL_KEY;
+
+if (!sslCertPath || !sslKeyPath) {
+  console.error('SSL certificate or key not found');
+  process.exit(1);
+}
+
+const sslCert = fs.readFileSync(sslCertPath).toString();
+const sslKey = fs.readFileSync(sslKeyPath).toString();
+
 const port = Number(process.env.PORT || 8081);
 
 console.log('Starting server on port: ', port);
-const wss = new ws.Server({ port: port });
+
+const httpsServer = https.createServer({ cert: sslCert, key: sslKey })
+
+const wss = new ws.Server({ server: httpsServer });
 
 const broadcast = (message: ChatMessage) => {
   console.log('Broadcasting message: ', message)
@@ -67,7 +82,7 @@ wss.on('connection', ws => {
         ws.send(JSON.stringify({ type: 'signup', success: false }));
         return;
       }
-      
+
       const token = generateNewToken();
       const user: User = {
         token,
@@ -102,3 +117,5 @@ wss.on('connection', ws => {
 
   ws.send(JSON.stringify({ type: 'update', messageHistory, success: true }));
 })
+
+httpsServer.listen(port);
