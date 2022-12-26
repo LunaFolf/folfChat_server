@@ -7,8 +7,10 @@ const wordDict = require('./words.json');
 const messageHistory: ChatMessage[] = [];
 const users: User[] = [];
 
-console.log('Starting server on port: ', process.env.PORT);
-const wss = new ws.Server({ port: process.env.PORT });
+const port = Number(process.env.PORT || 8081);
+
+console.log('Starting server on port: ', port);
+const wss = new ws.Server({ port: port });
 
 const broadcast = (message: ChatMessage) => {
   console.log('Broadcasting message: ', message)
