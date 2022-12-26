@@ -1,0 +1,21 @@
+{
+  "name": "folfchat_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "start": "tsc --watch & node --watch --no-warnings dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^18.11.17",
+    "@types/ws": "^8.5.3",
+    "@whiskeedev/trestle": "^2.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.4",
+    "ws": "^8.11.0"
+  }
+}
