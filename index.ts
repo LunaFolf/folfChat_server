@@ -63,6 +63,11 @@ wss.on('connection', ws => {
     }
 
     if (parsedMessage.type === 'signup') {
+      if (userExists(parsedMessage.token)) {
+        ws.send(JSON.stringify({ type: 'signup', success: false }));
+        return;
+      }
+      
       const token = generateNewToken();
       const user: User = {
         token,
